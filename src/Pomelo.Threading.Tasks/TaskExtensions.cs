@@ -7,6 +7,8 @@ namespace System.Threading.Tasks
     {
         public static async Task<T> WaitAny<T>(Func<T, bool> Predicate, ICollection<Task<T>> Tasks)
         {
+            if (!(Tasks is List<Task<T>>))
+                Tasks = Tasks.ToList();
             while (Tasks.Count() > 0)
             {
                 var finishedTask = await Task.WhenAny(Tasks);
@@ -17,11 +19,13 @@ namespace System.Threading.Tasks
             return default(T);
         }
 
-        public static Task<T> WaitAny<T>(Func<T, bool> Predicate, params Task<T>[] Tasks) => WaitAny(Predicate, Tasks);
+        public static Task<T> WaitAny<T>(Func<T, bool> Predicate, params Task<T>[] Tasks) => WaitAny(Predicate, Tasks as ICollection<Task<T>>);
 
         public static async Task<Task<T>> WhenAny<T>(Func<T, bool> Predicate, ICollection<Task<T>> Tasks)
         {
-            while(Tasks.Count() > 0)
+            if (!(Tasks is List<Task<T>>))
+                Tasks = Tasks.ToList();
+            while (Tasks.Count() > 0)
             {
                 var finishedTask = await Task.WhenAny(Tasks);
                 Tasks.Remove(finishedTask);
@@ -31,6 +35,6 @@ namespace System.Threading.Tasks
             return null;
         }
 
-        public static Task<Task<T>> WhenAny<T>(Func<T, bool> Predicate, params Task<T>[] Tasks) => WhenAny(Predicate, Tasks);
+        public static Task<Task<T>> WhenAny<T>(Func<T, bool> Predicate, params Task<T>[] Tasks) => WhenAny(Predicate, Tasks as ICollection<Task<T>>);
     }
 }

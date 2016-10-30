@@ -1,0 +1,28 @@
+﻿{
+  "version": "1.0.0-*",
+
+  "packOptions": {
+    "title": "Pomelo Task Ex",
+    "authors": [ "AmamiyaYuuko" ],
+    "tags": [ "Task Extensions" ],
+    "description": "MySQL provider for Entity Framework Core",
+    "projectUrl": "https://github.com/PomeloFoundation/TaskEx",
+    "iconUrl": "http://www.1234.sh/assets/Shared/pomelofoundation.png",
+    "licenseUrl": "https://github.com/PomeloFoundation/TaskEx/blob/master/LICENSE",
+    "repository": {
+      "type": "git",
+      "url": "git://github.com/pomelofoundation/taskex"
+    }
+  },
+
+  "dependencies": {
+    "System.Threading.Tasks.Parallel": "4.0.0",
+    "System.Linq": "4.1.0"
+  },
+
+  "frameworks": {
+    "netstandard1.1": {
+      "imports": "dnxcore50"
+    }
+  }
+}
